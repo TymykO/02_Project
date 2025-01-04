@@ -1,4 +1,5 @@
 import zipfile
+import os
 
 def read_csv_from_zip(zip_path: str, parameter_code: str, station_code: str):
     try:
@@ -25,7 +26,19 @@ def read_csv_from_zip(zip_path: str, parameter_code: str, station_code: str):
         print("Error File")
         return []
 
-print(read_csv_from_zip('Meteo/Meteo_2023-01.zip', 'B00300S', '352200375')[0])
+def combined_all_meteo_data(parameter_code: str='B00300S', station_code: str='352200375', folder: str='./Meteo'):
+    combined_data = []
+    try:
+        for file in os.listdir(folder):
+            if file.endswith('.zip'):
+                meteo_data = read_csv_from_zip(os.path.join(folder, file),parameter_code, station_code)
+                for x in meteo_data:
+                    combined_data.append(x)
+    except FileNotFoundError:
+        print("Error File")
+        return []
+    return combined_data
+
 
 if __name__ == "__main__":
 

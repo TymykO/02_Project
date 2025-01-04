@@ -10,7 +10,7 @@ for file in os.listdir(folder):
         for x in meteo_data:
             combined_data.append(x)
 
-with open('oll_data.csv', 'w', encoding='utf-8') as data_file:
+with open('oll_meteo_data.csv', 'w', encoding='utf-8') as data_file:
     for x in combined_data:
         data_file.write(f'{x}\n')
 
