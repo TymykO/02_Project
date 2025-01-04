@@ -17,7 +17,7 @@ def read_csv_from_zip(zip_path: str, parameter_code: str, station_code: str):
                             line = x.decode('utf-8').strip().split(';')
                             if line[0] == station_code and line[1] == parameter_code:
                                 value = line[3].replace(',','.')
-                                data_station.append(f'{line[0]};{line[2]};{value}')
+                                data_station.append([line[0],line[2],value])
         return data_station
     except IndexError:
         print("Error Index")
